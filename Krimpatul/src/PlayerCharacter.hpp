@@ -1,18 +1,15 @@
-#ifndef PLAYER_CHARACTER_HPP_
-#define PLAYER_CHARACTER_HPP_
+#ifndef PLAYERCHARACTER_HPP
+#define PLAYERCHARACTER_HPP
 
 #include "BaseCharacter.hpp"
 
-class PlayerCharacter :
-    public BaseCharacter
+class PlayerCharacter : public BaseCharacter
 {
 public:
-    PlayerCharacter() = default;
-    ~PlayerCharacter() = default;
+    PlayerCharacter(std::string name = "Unset");
+    ~PlayerCharacter();
 private:
-    std::string m_name_character{ "Unset" };
-    std::string m_name_player{ "Unset" };
-    unsigned int m_experience{ 0 };
+    std::string m_name;
 };
 
-#endif // !PLAYER_CHARACTER_HPP_
+#endif

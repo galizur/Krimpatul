@@ -1,13 +1,7 @@
 #include "krpch.hpp"
 
-#include "PlayerCharacter.hpp"
-
-// To be deleted
-#include <iostream>
-
-auto main() -> int
+auto main(int argc, char** argv) -> int
 {
-    PlayerCharacter player;
-    std::cout << player.classesToString(player.getClasses()) << '\n';
+
     return 0;
 }

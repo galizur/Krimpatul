@@ -2,6 +2,8 @@
 #define KRPCH_HPP_
 
 #include <array>
+#include <map>
+#include <ostream>
 #include <string>
 #include <tuple>
 
