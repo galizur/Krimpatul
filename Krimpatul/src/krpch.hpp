@@ -2,9 +2,12 @@
 #define KRPCH_HPP_
 
 #include <array>
+#include <cmath>
 #include <map>
 #include <ostream>
+#include <random>
 #include <string>
 #include <tuple>
+#include <utility>
 
 #endif // !KRPCH_HPP_
