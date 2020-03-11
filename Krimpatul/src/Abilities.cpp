@@ -33,6 +33,11 @@ auto Abilities::getAbilities() const -> std::map<std::string, unsigned short>
     return m_abilities;
 }
 
+auto Abilities::getAbilityMod(std::string ability) const -> short
+{
+    return std::ceil(m_abilities.find(ability)->second - 10 / 2);
+}
+
 auto Abilities::resetAbilities(const RaceEnum race) -> void
 {
     std::map<std::string, unsigned short>::iterator it = m_abilities.begin();

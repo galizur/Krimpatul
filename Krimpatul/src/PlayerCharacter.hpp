@@ -7,7 +7,8 @@ class PlayerCharacter : public BaseCharacter
 {
 public:
     PlayerCharacter(std::string name = "Unset");
-    ~PlayerCharacter();
+    ~PlayerCharacter(){};
+
 private:
     std::string m_name;
 };

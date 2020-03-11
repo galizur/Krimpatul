@@ -7,7 +7,7 @@ class HitPoints
 {
 public:
     HitPoints(ClassEnum cclass, short ability);
-    ~HitPoints();
+    ~HitPoints(){};
 
     auto setHitPoints(const ClassEnum cclass, short ability) -> void;
     auto setHitPointsFirstLevel(const ClassEnum cclass, short ability) -> void;

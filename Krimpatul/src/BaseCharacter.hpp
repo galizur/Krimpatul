@@ -3,6 +3,7 @@
 
 #include "krpch.hpp"
 
+#include "Abilities.hpp"
 #include "Alignment.hpp"
 #include "Race.hpp"
 #include "CClass.hpp"
@@ -18,12 +19,9 @@ protected:
     virtual ~BaseCharacter(){};
 
 private:
-    auto getAbilityMod(const unsigned short) -> short;
-
-    unsigned short                        m_level{1};
-    HitPoints                             m_hitpoints;
-    std::map<std::string, unsigned short> m_abilities{
-        {"STR", 8}, {"DEX", 8}, {"CON", 8}, {"INT", 8}, {"WIS", 8}, {"CHA", 8}};
+    Abilities      m_abilities;
+    unsigned short m_level{1};
+    HitPoints      m_hitpoints;
 };
 
 #endif
