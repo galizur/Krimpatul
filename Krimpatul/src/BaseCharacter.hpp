@@ -5,6 +5,7 @@
 
 #include "Abilities.hpp"
 #include "Alignment.hpp"
+#include "BaseAbilities.hpp"
 #include "Race.hpp"
 #include "CClass.hpp"
 #include "Hitpoints.hpp"
@@ -19,8 +20,9 @@ protected:
     virtual ~BaseCharacter(){};
 
 private:
+    unsigned short m_level;
     Abilities      m_abilities;
-    unsigned short m_level{1};
+    BaseAbilities  m_base_abilities;
     HitPoints      m_hitpoints;
 };
 
