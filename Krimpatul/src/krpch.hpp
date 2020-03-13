@@ -10,4 +10,6 @@
 #include <tuple>
 #include <utility>
 
-#endif // !KRPCH_HPP_
+#include "Constants.hpp"
+
+#endif    // !KRPCH_HPP_
