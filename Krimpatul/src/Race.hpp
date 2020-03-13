@@ -3,6 +3,8 @@
 
 #include "krpch.hpp"
 
+#include "Size.hpp"
+
 enum class RaceEnum
 {
     DWARF,
@@ -14,7 +16,7 @@ enum class RaceEnum
     HUMAN
 };
 
-class Race
+class Race : public Size
 {
 public:
     auto        setRace(const RaceEnum) -> void;
@@ -23,7 +25,7 @@ public:
         -> std::ostream &;
 
 protected:
-    Race(RaceEnum race = RaceEnum::DWARF);
+    Race(RaceEnum race = RaceEnum::HUMAN, SizeEnum size = SizeEnum::MEDIUM);
     virtual ~Race(){};
 
 private:

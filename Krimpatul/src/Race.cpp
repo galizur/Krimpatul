@@ -2,7 +2,7 @@
 
 #include "Race.hpp"
 
-Race::Race(RaceEnum race) : m_race{race}
+Race::Race(RaceEnum race, SizeEnum size) : m_race{race}
 {
     enumToStringMap.insert({{RaceEnum::DWARF, "Dwarf"},
                             {RaceEnum::ELF, "Elf"},

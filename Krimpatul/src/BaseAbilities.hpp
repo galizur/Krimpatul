@@ -1,6 +1,8 @@
 #ifndef BASEABILITIES_HPP
 #define BASEABILITIES_HPP
 
+#include "krpch.hpp"
+
 #include "CClass.hpp"
 
 class BaseAbilities
@@ -21,7 +23,7 @@ private:
     auto calculateBaseSaveHigh(const unsigned short) -> unsigned short;
     auto calculateBaseSaveLow(const unsigned short) -> unsigned short;
 
-    unsigned short m_base_attack;
+    unsigned short                        m_base_attack;
     std::map<std::string, unsigned short> m_base_save{
         {"FORT", 0}, {"REF", 0}, {"WILL", 0}};
 };
