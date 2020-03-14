@@ -2,7 +2,7 @@
 require "export-compile-commands"
 
 workspace "Krimpatul"
-architecture "x64"
+architecture "x86_64"
 startproject "Krimpatul"
 
 configurations
@@ -15,7 +15,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "Krimpatul"
 location "Krimpatul"
-kind "Consoleapp"
+kind "ConsoleApp"
 language "C++"
 cppdialect "C++17"
 staticruntime "on"
@@ -63,4 +63,4 @@ symbols "On"
 filter "Configurations:Release"
 defines "KR_RELEASE"
 runtime "Release"
-optimize "on"
+optimize "On"
