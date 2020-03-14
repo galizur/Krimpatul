@@ -50,7 +50,7 @@ auto Abilities::getAbilityMod(std::string ability) const -> short
 
 auto Abilities::resetAbilities(const RaceEnum race) -> void
 {
-    for(auto x : m_abilities) x.second = constants::abilities::base;
+    for(auto x : m_abilities) { x.second = constants::abilities::base; }
     setRacialAdjustment(race);
 }
 

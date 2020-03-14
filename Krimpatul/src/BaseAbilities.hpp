@@ -9,23 +9,23 @@ class BaseAbilities
 {
 public:
     BaseAbilities(ClassEnum, unsigned short);
-    ~BaseAbilities(){};
+    ~BaseAbilities() = default;
 
-    auto setBaseAttackBonus(const ClassEnum, const unsigned short) -> void;
-    auto setBaseSaveBonus(const ClassEnum, const unsigned short) -> void;
+    auto setBaseAttackBonus(ClassEnum, unsigned short) -> void;
+    auto setBaseSaveBonus(ClassEnum, unsigned short) -> void;
 
-    auto getBaseAttackBonus() const -> unsigned short;
-    auto getBaseSaveBonus() const -> std::map<std::string, unsigned short>;
-    auto getOneSave(const std::string) const
+    [[nodiscard]] auto getBaseAttackBonus() const -> unsigned short;
+    [[nodiscard]] auto getBaseSaveBonus() const
+        -> std::map<std::string, unsigned short>;
+    [[nodiscard]] auto getOneSave(std::string) const
         -> std::pair<std::string, unsigned short>;
 
 private:
-    auto calculateBaseSaveHigh(const unsigned short) -> unsigned short;
-    auto calculateBaseSaveLow(const unsigned short) -> unsigned short;
+    auto calculateBaseSaveHigh(unsigned short) -> unsigned short;
+    auto calculateBaseSaveLow(unsigned short) -> unsigned short;
 
     unsigned short                        m_base_attack;
-    std::map<std::string, unsigned short> m_base_save{
-        {"FORT", 0}, {"REF", 0}, {"WILL", 0}};
+    std::map<std::string, unsigned short> m_base_save;
 };
 
 #endif

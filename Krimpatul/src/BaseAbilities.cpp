@@ -3,6 +3,7 @@
 #include "BaseAbilities.hpp"
 
 BaseAbilities::BaseAbilities(ClassEnum cclass, unsigned short level)
+    : m_base_attack{0}, m_base_save{{"FORT", 0}, {"REF", 0}, {"WILL", 0}}
 {
     setBaseAttackBonus(cclass, level);
     setBaseSaveBonus(cclass, level);
@@ -100,11 +101,13 @@ auto BaseAbilities::getOneSave(const std::string value) const
 auto BaseAbilities::calculateBaseSaveHigh(const unsigned short level)
     -> unsigned short
 {
-    return std::floor(static_cast<double>(level) / 2) + 2;
+    return static_cast<unsigned short>(
+        std::floor(static_cast<double>(level) / 2) + 2);
 }
 
 auto BaseAbilities::calculateBaseSaveLow(const unsigned short level)
     -> unsigned short
 {
-    return std::floor(calculateBaseSaveHigh(level) / 2);
+    return static_cast<unsigned short>(
+        std::floor(calculateBaseSaveHigh(level) / 2));
 }

@@ -12,22 +12,25 @@ public:
     Abilities(RaceEnum race);
     ~Abilities() = default;
 
-    auto setOneAbility(const std::string, unsigned short) -> void;
+    auto setOneAbility(std::string /*ability*/, unsigned short /*value*/)
+        -> void;
     auto setAbilities(
-        const std::array<unsigned short, constants::abilities::count>) -> void;
+        std::array<unsigned short, constants::abilities::count> /*values*/)
+        -> void;
 
-    auto getOneAbility(const std::string) const
+    [[nodiscard]] auto getOneAbility(std::string /*value*/) const
         -> std::pair<std::string, unsigned short>;
-    auto getAbilities() const -> std::map<std::string, unsigned short>;
-    auto getAbilityMod(std::string) const -> short;
+    [[nodiscard]] auto getAbilities() const
+        -> std::map<std::string, unsigned short>;
+    [[nodiscard]] auto getAbilityMod(std::string /*ability*/) const -> short;
 
-    auto resetAbilities(RaceEnum) -> void;
+    auto resetAbilities(RaceEnum /*race*/) -> void;
 
     friend auto operator<<(std::ostream &out, const Abilities &abilities)
         -> std::ostream &;
 
 private:
-    auto setRacialAdjustment(const RaceEnum race) -> void;
+    auto setRacialAdjustment(RaceEnum race) -> void;
     std::map<std::string, unsigned short> m_abilities;
 };
 

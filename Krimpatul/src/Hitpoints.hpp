@@ -7,11 +7,11 @@ class HitPoints
 {
 public:
     HitPoints(ClassEnum cclass, short ability);
-    ~HitPoints(){};
+    ~HitPoints()= default;;
 
-    auto setHitPoints(const ClassEnum cclass, short ability) -> void;
-    auto setHitPointsFirstLevel(const ClassEnum cclass, short ability) -> void;
-    auto getHitPoints() const -> unsigned int;
+    auto setHitPoints(ClassEnum cclass, short ability) -> void;
+    auto setHitPointsFirstLevel(ClassEnum cclass, short ability) -> void;
+    [[nodiscard]] auto getHitPoints() const -> unsigned int;
     friend auto operator<<(std::ostream &out, const HitPoints &hp)
         -> std::ostream &;
 

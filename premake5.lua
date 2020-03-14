@@ -1,5 +1,4 @@
 -- premake 5
-require "export-compile-commands"
 
 workspace "Krimpatul"
 architecture "x86_64"

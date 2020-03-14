@@ -2,7 +2,7 @@
 
 #include "Size.hpp"
 
-Size::Size(SizeEnum size) : m_size{size}
+Size::Size(SizeEnum size) : m_size{size}, m_size_mod{0}
 {
     enumToStringMap.insert({{SizeEnum::FINE, "Fine"},
                             {SizeEnum::DIMINUTIVE, "Diminutive"},

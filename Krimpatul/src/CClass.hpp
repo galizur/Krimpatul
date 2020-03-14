@@ -21,14 +21,14 @@ enum class ClassEnum
 class CClass
 {
 public:
-    auto        setClass(const ClassEnum) -> void;
-    auto        getClass() const -> ClassEnum;
+    auto        setClass(ClassEnum /*cclass*/) -> void;
+    [[nodiscard]] auto        getClass() const -> ClassEnum;
     friend auto operator<<(std::ostream &out, const CClass &cclass)
         -> std::ostream &;
 
 protected:
     CClass(ClassEnum cclass = ClassEnum::BARBARIAN);
-    virtual ~CClass(){};
+    virtual ~CClass() = default;
 
 private:
     ClassEnum                        m_class;

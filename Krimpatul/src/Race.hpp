@@ -19,14 +19,15 @@ enum class RaceEnum
 class Race : public Size
 {
 public:
-    auto        setRace(const RaceEnum) -> void;
-    auto        getRace() const -> RaceEnum;
-    friend auto operator<<(std::ostream &out, const Race &race)
+    auto               setRace(RaceEnum /*race*/) -> void;
+    [[nodiscard]] auto getRace() const -> RaceEnum;
+    friend auto        operator<<(std::ostream &out, const Race &race)
         -> std::ostream &;
 
 protected:
     Race(RaceEnum race = RaceEnum::HUMAN, SizeEnum size = SizeEnum::MEDIUM);
-    virtual ~Race(){};
+    ~Race() override = default;
+    ;
 
 private:
     RaceEnum                        m_race;

@@ -19,14 +19,14 @@ enum class AlignEnum
 class Alignment
 {
 public:
-    auto        setAlignment(const AlignEnum) -> void;
-    auto        getAlignment() const -> AlignEnum;
+    auto        setAlignment(AlignEnum /*align*/) -> void;
+    [[nodiscard]] auto        getAlignment() const -> AlignEnum;
     friend auto operator<<(std::ostream &out, const Alignment &align)
         -> std::ostream &;
 
 protected:
     Alignment(AlignEnum align = AlignEnum::LAWFUL_GOOD);
-    virtual ~Alignment(){};
+    virtual ~Alignment()= default;;
 
 private:
     AlignEnum                        m_alignment;

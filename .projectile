@@ -1,3 +1,4 @@
--.ccls-cache/
--bin/
--bin-int/
+-/.ccls-cache
+-/.clangd
+-/bin
+-/bin-int

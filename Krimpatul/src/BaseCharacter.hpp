@@ -13,19 +13,19 @@
 class BaseCharacter : public Race, public CClass, public Alignment
 {
 public:
-    auto setAttackBonusMelee(const BaseAbilities, const Abilities, const Race)
+    auto setAttackBonusMelee(BaseAbilities /*bab*/, Abilities /*str*/, Race /*size*/)
         -> void;
-    auto setAttackBonusRanged(const BaseAbilities, const Abilities, const Race,
-                              const short) -> void;
+    auto setAttackBonusRanged(BaseAbilities /*bab*/, Abilities /*dex*/, Race /*size*/,
+                              short /*penalty*/) -> void;
 
-    auto getAttackBonusMelee() const -> int;
-    auto getAttackBonusRanged() const -> int;
+    [[nodiscard]] auto getAttackBonusMelee() const -> int;
+    [[nodiscard]] auto getAttackBonusRanged() const -> int;
 
 protected:
     BaseCharacter(RaceEnum  race   = RaceEnum::DWARF,
                   ClassEnum cclass = ClassEnum::BARBARIAN,
                   AlignEnum align  = AlignEnum::LAWFUL_GOOD);
-    virtual ~BaseCharacter(){};
+    ~BaseCharacter() override= default;;
 
 private:
     unsigned short m_level;
