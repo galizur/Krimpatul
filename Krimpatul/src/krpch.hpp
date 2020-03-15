@@ -9,7 +9,9 @@
 #include <string>
 #include <tuple>
 #include <utility>
+#include <vector>
 
 #include "Constants.hpp"
+#include "Enumerators.hpp"
 
 #endif    // !KRPCH_HPP_

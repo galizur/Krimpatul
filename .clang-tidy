@@ -3,7 +3,7 @@ Checks:          'clang-diagnostic-*,clang-analyzer-*,readability-*,cppcoreguide
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*'
 AnalyzeTemporaryDtors: false
-FormatStyle:     none
+FormatStyle:     file
 User:            charlie
 CheckOptions:
   - key:             cert-dcl16-c.NewSuffixes
@@ -171,4 +171,3 @@ CheckOptions:
   - key:             readability-uppercase-literal-suffix.NewSuffixes
     value:           ''
 ...
-

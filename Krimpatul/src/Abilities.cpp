@@ -1,56 +1,52 @@
 #include "krpch.hpp"
 
 #include "Abilities.hpp"
+#include <cstddef>
 
 Abilities::Abilities(RaceEnum race)
-    : m_abilities{{{"STR", constants::abilities::base},
-                   {"DEX", constants::abilities::base},
-                   {"CON", constants::abilities::base},
-                   {"INT", constants::abilities::base},
-                   {"WIS", constants::abilities::base},
-                   {"CHA", constants::abilities::base}}}
+    : m_abilities{{{"STR", consts::abils::base},
+                   {"DEX", consts::abils::base},
+                   {"CON", consts::abils::base},
+                   {"INT", consts::abils::base},
+                   {"WIS", consts::abils::base},
+                   {"CHA", consts::abils::base}}}
 {
     setRacialAdjustment(race);
 }
 
-auto Abilities::setOneAbility(const std::string ability, unsigned short value)
-    -> void
+auto Abilities::setOneAbility(const unsigned short position,
+                              unsigned short       value) -> void
 {
-    m_abilities.find(ability)->second = value;
+    m_abilities.at(position).second = value;
 }
 
-auto Abilities::setAbilities(
-    const std::array<unsigned short, constants::abilities::count> values)
-    -> void
+auto Abilities::setAbilities(const std::array<unsigned short, consts::abils::count> values) -> void
 {
-    // TODO: find a better implementation.
-    m_abilities.find("STR")->second = values[0];
-    m_abilities.find("DEX")->second = values[1];
-    m_abilities.find("CON")->second = values[2];
-    m_abilities.find("INT")->second = values[3];
-    m_abilities.find("WIS")->second = values[4];
-    m_abilities.find("CHA")->second = values[5];
+    for(size_t i = 0; i < values.size(); ++i) { m_abilities.at(i).second = values.at(i); }
 }
 
-auto Abilities::getOneAbility(const std::string value) const -> std::pair<std::string, unsigned short>
+auto Abilities::getOneAbility(const unsigned short position) const
+    -> std::pair<std::string, unsigned short>
 {
-    return std::make_pair(m_abilities.find(value)->first, m_abilities.find(value)->second);
+    return m_abilities.at(position);
 }
 
-auto Abilities::getAbilities() const -> std::map<std::string, unsigned short>
+auto Abilities::getAbilities() const
+    -> std::array<std::pair<std::string, unsigned int>, consts::abils::count>
 {
     return m_abilities;
 }
 
 // The formula to get an Ability modifier is: (Ability - 10) / 2
-auto Abilities::getAbilityMod(std::string ability) const -> short
+auto Abilities::getAbilityMod(unsigned short position) const -> short
 {
-    return std::ceil((m_abilities.find(ability)->second - 10) / 2);
+    return std::ceil((m_abilities.at(position).second - consts::abils::form10) /
+                     consts::abils::form2);
 }
 
 auto Abilities::resetAbilities(const RaceEnum race) -> void
 {
-    for(auto x : m_abilities) { x.second = constants::abilities::base; }
+    for(auto x : m_abilities) { x.second = consts::abils::base; }
     setRacialAdjustment(race);
 }
 
@@ -59,25 +55,25 @@ auto Abilities::setRacialAdjustment(const RaceEnum race) -> void
     switch(race)
     {
     case RaceEnum::DWARF:
-        m_abilities.find("CON")->second += constants::abilities::racial;
-        m_abilities.find("CHA")->second -= constants::abilities::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::CON)).second += consts::abils::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::CHA)).second -= consts::abils::racial;
         break;
     case RaceEnum::ELF:
-        m_abilities.find("DEX")->second += constants::abilities::racial;
-        m_abilities.find("CON")->second -= constants::abilities::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::DEX)).second += consts::abils::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::CON)).second -= consts::abils::racial;
         break;
     case RaceEnum::GNOME:
-        m_abilities.find("CON")->second += constants::abilities::racial;
-        m_abilities.find("STR")->second -= constants::abilities::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::CON)).second += consts::abils::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::STR)).second -= consts::abils::racial;
         break;
     case RaceEnum::HALF_ORC:
-        m_abilities.find("STR")->second += constants::abilities::racial;
-        m_abilities.find("INT")->second -= constants::abilities::racial;
-        m_abilities.find("CHA")->second -= constants::abilities::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::STR)).second += consts::abils::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::INT)).second -= consts::abils::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::CHA)).second -= consts::abils::racial;
         break;
     case RaceEnum::HALFLING:
-        m_abilities.find("DEX")->second += constants::abilities::racial;
-        m_abilities.find("STR")->second -= constants::abilities::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::DEX)).second += consts::abils::racial;
+        m_abilities.at(static_cast<int>(AbilitiesEnum::STR)).second -= consts::abils::racial;
         break;
     case RaceEnum::HUMAN:
     case RaceEnum::HALF_ELF: break;
@@ -88,11 +84,6 @@ auto Abilities::setRacialAdjustment(const RaceEnum race) -> void
 // well as multiples and/or everything.
 auto operator<<(std::ostream &out, const Abilities &abilities) -> std::ostream &
 {
-    out << "STR: " << abilities.m_abilities.find("STR")->second << '\n'
-        << "DEX: " << abilities.m_abilities.find("DEX")->second << '\n'
-        << "CON: " << abilities.m_abilities.find("CON")->second << '\n'
-        << "INT: " << abilities.m_abilities.find("INT")->second << '\n'
-        << "WIS: " << abilities.m_abilities.find("WIS")->second << '\n'
-        << "CHA: " << abilities.m_abilities.find("CHA")->second << '\n';
+    for(auto x : abilities.m_abilities) { out << x.first << " " << x.second << '\n'; }
     return out;
 }

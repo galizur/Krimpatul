@@ -3,27 +3,23 @@
 #include "BaseCharacter.hpp"
 
 BaseCharacter::BaseCharacter(RaceEnum race, ClassEnum cclass, AlignEnum align)
-    : m_level{1}, Race{race}, CClass{cclass}, Alignment{align},
-      m_abilities{race}, m_hitpoints{cclass, m_abilities.getAbilityMod("CON")},
-      m_base_abilities{cclass, m_level}
+    : m_level{1}, Race{race}, CClass{cclass}, Alignment{align}, m_abilities{race},
+      m_hitpoints{cclass, m_abilities.getAbilityMod(2)}, m_base_abilities{cclass, m_level}
 {
 }
 
-auto BaseCharacter::setAttackBonusMelee(const BaseAbilities bab,
-                                        const Abilities str, const Race size)
-    -> void
+auto BaseCharacter::setAttackBonusMelee(const BaseAbilities bab, const Abilities str,
+                                        const Race size) -> void
 {
-    m_attack_bonus_melee = bab.getBaseAttackBonus() +
-                           str.getOneAbility("STR").second + size.getSizeMod();
+    m_attack_bonus_melee =
+        bab.getBaseAttackBonus() + str.getOneAbility(0).second + size.getSizeMod();
 }
 
-auto BaseCharacter::setAttackBonusRanged(const BaseAbilities bab,
-                                         const Abilities dex, const Race size,
-                                         const short penalty) -> void
+auto BaseCharacter::setAttackBonusRanged(const BaseAbilities bab, const Abilities dex,
+                                         const Race size, const short penalty) -> void
 {
-    m_attack_bonus_ranged = bab.getBaseAttackBonus() +
-                            dex.getOneAbility("DEX").second +
-                            size.getSizeMod() - penalty;
+    m_attack_bonus_ranged =
+        bab.getBaseAttackBonus() + dex.getOneAbility(1).second + size.getSizeMod() - penalty;
 }
 
 auto BaseCharacter::getAttackBonusMelee() const -> int

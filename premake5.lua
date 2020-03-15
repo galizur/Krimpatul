@@ -12,6 +12,7 @@ configurations
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+group "A. Project"
 project "Krimpatul"
 location "Krimpatul"
 kind "ConsoleApp"
@@ -34,7 +35,7 @@ files
 
 includedirs
 {
-   "%{prj.name}/src"
+   "%{prj.name}/src",
 }
 
 filter "system:windows"
@@ -63,3 +64,4 @@ filter "Configurations:Release"
 defines "KR_RELEASE"
 runtime "Release"
 optimize "On"
+group ""

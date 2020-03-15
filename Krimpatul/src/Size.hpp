@@ -3,23 +3,6 @@
 
 #include "krpch.hpp"
 
-enum class SizeEnum
-{
-    FINE,
-    DIMINUTIVE,
-    TINY,
-    SMALL,
-    MEDIUM,
-    LARGE_TALL,
-    LARGE_LONG,
-    HUGE_TALL,
-    HUGE_LONG,
-    GARGANTUAN_TALL,
-    GARGANTUAN_LONG,
-    COLOSSAL_TALL,
-    COLOSSAL_LONG
-};
-
 class Size
 {
 public:
@@ -38,8 +21,7 @@ public:
     [[nodiscard]] auto getSize() const -> SizeEnum;
     [[nodiscard]] auto getSizeMod() const -> short;
 
-    friend auto operator<<(std::ostream &out, const Size &size)
-        -> std::ostream &;
+    friend auto operator<<(std::ostream &out, const Size &size) -> std::ostream &;
 
 protected:
     Size(SizeEnum size = SizeEnum::MEDIUM);

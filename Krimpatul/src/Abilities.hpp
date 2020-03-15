@@ -7,31 +7,33 @@
 
 class Abilities
 {
+    using ArrayOfPairs = std::array<std::pair<std::string, unsigned int>, consts::abils::count>;
+
 public:
     // Abilities are modified by race.
     Abilities(RaceEnum race);
-    ~Abilities() = default;
+    ~Abilities()                 = default;
+    Abilities(const Abilities &) = default;
+    auto operator=(const Abilities &) -> Abilities & = default;
+    Abilities(Abilities &&)                          = default;
+    auto operator=(Abilities &&) -> Abilities & = default;
 
-    auto setOneAbility(std::string /*ability*/, unsigned short /*value*/)
-        -> void;
-    auto setAbilities(
-        std::array<unsigned short, constants::abilities::count> /*values*/)
-        -> void;
+    auto setOneAbility(unsigned short /*position*/, unsigned short /*value*/) -> void;
+    auto setAbilities(std::array<unsigned short, consts::abils::count> /*values*/) -> void;
 
-    [[nodiscard]] auto getOneAbility(std::string /*value*/) const
+    [[nodiscard]] auto getOneAbility(unsigned short /*position*/) const
         -> std::pair<std::string, unsigned short>;
-    [[nodiscard]] auto getAbilities() const
-        -> std::map<std::string, unsigned short>;
-    [[nodiscard]] auto getAbilityMod(std::string /*ability*/) const -> short;
+    [[nodiscard]] auto getAbilities() const -> ArrayOfPairs;
+    [[nodiscard]] auto getAbilityMod(unsigned short /*position*/) const -> short;
 
     auto resetAbilities(RaceEnum /*race*/) -> void;
 
-    friend auto operator<<(std::ostream &out, const Abilities &abilities)
-        -> std::ostream &;
+    friend auto operator<<(std::ostream &out, const Abilities &abilities) -> std::ostream &;
 
 private:
     auto setRacialAdjustment(RaceEnum race) -> void;
-    std::map<std::string, unsigned short> m_abilities;
+
+    ArrayOfPairs m_abilities;
 };
 
 auto operator<<(std::ostream &out, const Abilities &abilities)
