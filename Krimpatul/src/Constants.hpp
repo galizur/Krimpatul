@@ -11,6 +11,10 @@ namespace consts
         inline constexpr int form10{10};
         inline constexpr int form2{2};
     }    // namespace abils
+    namespace armor
+    {
+        inline constexpr int base{10};
+    }    // namespace armor
     namespace hp
     {
         inline constexpr int min{1};

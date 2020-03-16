@@ -1,3 +1,5 @@
+#include "Constants.hpp"
+#include "Enumerators.hpp"
 #include "krpch.hpp"
 
 #include "BaseCharacter.hpp"
@@ -107,4 +109,79 @@ auto BaseCharacter::setGrapple(const int bab, const int str_mod, const int size_
 auto BaseCharacter::getGrapple() const -> int
 {
     return m_grapple;
+}
+
+auto BaseCharacter::setArmorClass(const int armor, const int shield, const int dex_mod,
+                                  const int size_mod, const int nat_armor, const int defl_mod,
+                                  const int misc) -> void
+{
+    m_armor_class =
+        consts::armor::base + armor + shield + dex_mod + size_mod + nat_armor + defl_mod + misc;
+}
+
+auto BaseCharacter::setArmorTouch(const int dex_mod, const int size_mod, const int defl_mod,
+                                  const int misc) -> void
+{
+    m_armor_touch = consts::armor::base + dex_mod + size_mod + defl_mod + misc;
+}
+
+auto BaseCharacter::setArmorFlat(const int armor, const int shield, const int size_mod,
+                                 const int nat_armor, const int defl_mod, const int misc) -> void
+{
+    m_armor_flat = consts::armor::base + armor + shield + size_mod + nat_armor + defl_mod + misc;
+}
+
+auto BaseCharacter::getArmorClass() const -> int
+{
+    return m_armor_class;
+}
+
+auto BaseCharacter::getArmorTouch() const -> int
+{
+    return m_armor_touch;
+}
+
+auto BaseCharacter::getArmorFlat() const -> int
+{
+    return m_armor_flat;
+}
+
+auto BaseCharacter::setSpeed(const RaceEnum race, const std::string armor_rating) -> void
+{
+    switch(race)
+    {
+    case RaceEnum::DWARF: m_speed = 20; break;
+    case RaceEnum::GNOME:
+    case RaceEnum::HALFLING:
+    {
+        if(armor_rating == "None" || armor_rating == "Light")
+        {
+            m_speed = 20;
+        }
+        else
+        {
+            m_speed = 15;
+        }
+        break;
+    }
+    case RaceEnum::HALF_ELF:
+    case RaceEnum::ELF:
+    case RaceEnum::HUMAN:
+    case RaceEnum::HALF_ORC:
+    default:
+        if(armor_rating == "None" || armor_rating == "Light")
+        {
+            m_speed = 30;
+        }
+        else
+        {
+            m_speed = 20;
+        }
+        break;
+    }
+}
+
+auto BaseCharacter::getSpeed() const -> int
+{
+    return m_speed;
 }
