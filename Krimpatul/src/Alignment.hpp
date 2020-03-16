@@ -6,20 +6,25 @@
 class Alignment
 {
 public:
-    auto               setAlignment(AlignEnum /*align*/) -> void;
+    /* Deleted constructors */
+    Alignment(const Alignment &) = delete;
+    auto operator=(const Alignment &) -> Alignment & = delete;
+    Alignment(Alignment &&)                          = delete;
+    auto operator=(Alignment &&) -> Alignment & = delete;
+    /*********************/
+    /* Setters */
+    auto setAlignment(AlignEnum /*alignment*/) -> void;
+    /*********************/
+    /* Getters */
     [[nodiscard]] auto getAlignment() const -> AlignEnum;
-    friend auto        operator<<(std::ostream &out, const Alignment &align) -> std::ostream &;
-
+    /*********************/
 protected:
-    Alignment(AlignEnum align = AlignEnum::LAWFUL_GOOD);
+    /* Constructors */
+    Alignment(AlignEnum /*alignment*/);
     virtual ~Alignment() = default;
-    ;
-
+    /*********************/
 private:
-    AlignEnum                        m_alignment;
-    std::map<AlignEnum, std::string> enumToStringMap;
+    AlignEnum m_alignment;
 };
-
-auto operator<<(std::ostream &out, const Alignment &align) -> std::ostream &;
 
 #endif

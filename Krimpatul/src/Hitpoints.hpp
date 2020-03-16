@@ -6,19 +6,26 @@
 class HitPoints
 {
 public:
-    HitPoints(ClassEnum cclass, short ability);
-    ~HitPoints()= default;;
-
-    auto setHitPoints(ClassEnum cclass, short ability) -> void;
-    auto setHitPointsFirstLevel(ClassEnum cclass, short ability) -> void;
-    [[nodiscard]] auto getHitPoints() const -> unsigned int;
-    friend auto operator<<(std::ostream &out, const HitPoints &hp)
-        -> std::ostream &;
+    /* Constructors */
+    // Hit points are dealt according to class, constitution and level.
+    HitPoints(ClassEnum /*cclass*/, short /*constitution*/, unsigned int level = 1);
+    ~HitPoints()                 = default;
+    HitPoints(const HitPoints &) = default;
+    auto operator=(const HitPoints &) -> HitPoints & = default;
+    HitPoints(HitPoints &&)                          = default;
+    auto operator=(HitPoints &&) -> HitPoints & = default;
+    /******************/
+    /* Setters */
+    // Hitpoints are treated differently if they are for the first level.
+    auto setHitPoints(ClassEnum /*cclass*/, short /*constitution*/, unsigned int /*level*/) -> void;
+    auto setHitPointsFirstLevel(ClassEnum /*cclass*/, short /*constitution*/) -> void;
+    /******************/
+    /* Getters */
+    [[nodiscard]] auto getHitPoints() const -> int;
+    /******************/
 
 private:
-    unsigned int m_hitpoints;
+    int m_hitpoints;
 };
-
-auto operator<<(std::ostream &out, const HitPoints &hp) -> std::ostream &;
 
 #endif

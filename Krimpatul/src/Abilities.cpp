@@ -1,8 +1,9 @@
 #include "krpch.hpp"
 
 #include "Abilities.hpp"
-#include <cstddef>
 
+// First we have to set the abilities to their base number (8). Then we can modify them according to
+// the race of the creature.
 Abilities::Abilities(RaceEnum race)
     : m_abilities{{{"STR", consts::abils::base},
                    {"DEX", consts::abils::base},
@@ -14,12 +15,13 @@ Abilities::Abilities(RaceEnum race)
     setRacialAdjustment(race);
 }
 
-auto Abilities::setOneAbility(const unsigned short position,
-                              unsigned short       value) -> void
+auto Abilities::setOneAbility(const unsigned short position, unsigned short value) -> void
 {
     m_abilities.at(position).second = value;
 }
 
+// Sets the abilities according to the array we pass. The values of the array must be mapped
+// according to specific values (STR, DEX, CON, INT, WIS, CHA).
 auto Abilities::setAbilities(const std::array<unsigned short, consts::abils::count> values) -> void
 {
     for(size_t i = 0; i < values.size(); ++i) { m_abilities.at(i).second = values.at(i); }
@@ -37,7 +39,7 @@ auto Abilities::getAbilities() const
     return m_abilities;
 }
 
-// The formula to get an Ability modifier is: (Ability - 10) / 2
+// The formula to get an Ability modifier is: (Ability - 10) / 2 rounded up.
 auto Abilities::getAbilityMod(unsigned short position) const -> short
 {
     return std::ceil((m_abilities.at(position).second - consts::abils::form10) /
@@ -50,6 +52,7 @@ auto Abilities::resetAbilities(const RaceEnum race) -> void
     setRacialAdjustment(race);
 }
 
+// The racial adjustments is set according to a table in the Players Handbook.
 auto Abilities::setRacialAdjustment(const RaceEnum race) -> void
 {
     switch(race)
@@ -78,12 +81,4 @@ auto Abilities::setRacialAdjustment(const RaceEnum race) -> void
     case RaceEnum::HUMAN:
     case RaceEnum::HALF_ELF: break;
     }
-}
-
-// TODO: see if I can find a better solution to print individual abilities, as
-// well as multiples and/or everything.
-auto operator<<(std::ostream &out, const Abilities &abilities) -> std::ostream &
-{
-    for(auto x : abilities.m_abilities) { out << x.first << " " << x.second << '\n'; }
-    return out;
 }

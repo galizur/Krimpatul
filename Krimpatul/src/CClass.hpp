@@ -6,19 +6,27 @@
 class CClass
 {
 public:
-    auto               setClass(ClassEnum /*cclass*/) -> void;
+    /* Deleted constructors */
+    CClass(const CClass &) = delete;
+    auto operator=(const CClass &) -> CClass & = delete;
+    CClass(CClass &&)                          = delete;
+    auto operator=(CClass &&) -> CClass & = delete;
+    /************************/
+    /* Setters */
+    auto setClass(ClassEnum /*cclass*/) -> void;
+    /************************/
+    /* Getters */
     [[nodiscard]] auto getClass() const -> ClassEnum;
-    friend auto        operator<<(std::ostream &out, const CClass &cclass) -> std::ostream &;
+    /************************/
 
 protected:
-    CClass(ClassEnum cclass = ClassEnum::BARBARIAN);
+    /* Constructors */
+    CClass(ClassEnum cclass);
     virtual ~CClass() = default;
+    /************************/
 
 private:
-    ClassEnum                        m_class;
-    std::map<ClassEnum, std::string> enumToStringMap;
+    ClassEnum m_class;
 };
-
-auto operator<<(std::ostream &out, const CClass &cclass) -> std::ostream &;
 
 #endif

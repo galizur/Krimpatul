@@ -8,24 +8,34 @@
 class BaseAbilities
 {
 public:
-    BaseAbilities(ClassEnum, unsigned short);
-    ~BaseAbilities() = default;
-
-    auto setBaseAttackBonus(ClassEnum, unsigned short) -> void;
-    auto setBaseSaveBonus(ClassEnum, unsigned short) -> void;
-
+    using ArrayOfPairs = std::array<std::pair<std::string, unsigned short>, consts::saves::count>;
+    /* Constructors */
+    // Base abilities are dependant on the class of the creature, as well as the level of the class.
+    // We can safely assume that sometimes we start from the first level.
+    BaseAbilities(ClassEnum /*cclass*/, unsigned short class_level = 1);
+    ~BaseAbilities()                     = default;
+    BaseAbilities(const BaseAbilities &) = default;
+    auto operator=(const BaseAbilities &) -> BaseAbilities & = default;
+    BaseAbilities(BaseAbilities &&)                          = default;
+    auto operator=(BaseAbilities &&) -> BaseAbilities & = default;
+    /********************/
+    /* Setters */
+    auto setBaseAttackBonus(ClassEnum /*cclass*/, unsigned short /*level*/) -> void;
+    auto setBaseSaveBonus(ClassEnum /*cclass*/, unsigned short /*level*/) -> void;
+    /*******************/
+    /* Getters */
     [[nodiscard]] auto getBaseAttackBonus() const -> unsigned short;
-    [[nodiscard]] auto getBaseSaveBonus() const
-        -> std::map<std::string, unsigned short>;
-    [[nodiscard]] auto getOneSave(std::string) const
+    [[nodiscard]] auto getBaseSaveBonus() const -> ArrayOfPairs;
+    [[nodiscard]] auto getOneSave(unsigned short /*position*/) const
         -> std::pair<std::string, unsigned short>;
-
+    /*******************/
 private:
-    auto calculateBaseSaveHigh(unsigned short) -> unsigned short;
-    auto calculateBaseSaveLow(unsigned short) -> unsigned short;
+    // Base save bonuses come in high and low flavors.
+    static auto calculateBaseSaveHigh(unsigned short /*level*/) -> unsigned short;
+    static auto calculateBaseSaveLow(unsigned short /*level*/) -> unsigned short;
 
-    unsigned short                        m_base_attack;
-    std::map<std::string, unsigned short> m_base_save;
+    unsigned short m_base_attack;
+    ArrayOfPairs   m_base_save;
 };
 
 #endif

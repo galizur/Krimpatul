@@ -22,6 +22,13 @@ enum class AbilitiesEnum
     CHA = 5
 };
 
+enum class SavesEnum
+{
+    FORT = 0,
+    REF  = 1,
+    WILL = 2
+};
+
 enum class AlignEnum
 {
     LAWFUL_GOOD,
