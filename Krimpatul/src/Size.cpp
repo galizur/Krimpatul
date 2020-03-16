@@ -59,7 +59,7 @@ auto Size::getSize() const -> SizeEnum
     return m_size;
 }
 
-auto Size::getSizeMod() const -> short
+auto Size::getSizeMod() const -> int
 {
     return m_size_mod;
 }

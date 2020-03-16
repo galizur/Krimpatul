@@ -18,7 +18,7 @@ public:
     /************************/
     /* Getters */
     [[nodiscard]] auto getSize() const -> SizeEnum;
-    [[nodiscard]] auto getSizeMod() const -> short;
+    [[nodiscard]] auto getSizeMod() const -> int;
     /************************/
 protected:
     /* Constructors */
@@ -27,7 +27,7 @@ protected:
     /************************/
 private:
     SizeEnum m_size;
-    short    m_size_mod;
+    int      m_size_mod;
 };
 
 #endif

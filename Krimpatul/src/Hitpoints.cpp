@@ -1,11 +1,9 @@
-#include "Constants.hpp"
 #include "krpch.hpp"
 
 #include "Hitpoints.hpp"
-#include <cstddef>
 
 // We first set hitpoints to 0 since it will change immediately.
-HitPoints::HitPoints(ClassEnum cclass, short constitution, unsigned int level) : m_hitpoints{0}
+HitPoints::HitPoints(ClassEnum cclass, int constitution, int level) : m_hitpoints{0}
 {
     setHitPointsFirstLevel(cclass, constitution);
     if(level > consts::level::base)
@@ -15,7 +13,7 @@ HitPoints::HitPoints(ClassEnum cclass, short constitution, unsigned int level) :
 }
 
 // First level characters get full hitpoints, depending on their class and constitution score.
-auto HitPoints::setHitPointsFirstLevel(const ClassEnum cclass, short constitution) -> void
+auto HitPoints::setHitPointsFirstLevel(const ClassEnum cclass, int constitution) -> void
 {
     switch(cclass)
     {
@@ -36,11 +34,11 @@ auto HitPoints::setHitPointsFirstLevel(const ClassEnum cclass, short constitutio
 // Hitpoints after level one are set randomly. Each class has each own maximum hitpoints.
 // Since hitpoints are calculated with the constitution modifier, it is possible to get negative
 // hitpoints. In that case, the creature gets 1 hitpoint.
-auto HitPoints::setHitPoints(const ClassEnum cclass, short constitution, unsigned int level) -> void
+auto HitPoints::setHitPoints(const ClassEnum cclass, int constitution, int level) -> void
 {
     std::default_random_engine generator;
     using int_dist = std::uniform_int_distribution<int>;
-    for(size_t i = consts::level::base; i < level; ++i)
+    for(std::size_t i = consts::level::base; i < level; ++i)
     {
         switch(cclass)
         {

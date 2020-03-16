@@ -15,32 +15,31 @@ Abilities::Abilities(RaceEnum race)
     setRacialAdjustment(race);
 }
 
-auto Abilities::setOneAbility(const unsigned short position, unsigned short value) -> void
+auto Abilities::setOneAbility(const int position, int value) -> void
 {
     m_abilities.at(position).second = value;
 }
 
 // Sets the abilities according to the array we pass. The values of the array must be mapped
 // according to specific values (STR, DEX, CON, INT, WIS, CHA).
-auto Abilities::setAbilities(const std::array<unsigned short, consts::abils::count> values) -> void
+auto Abilities::setAbilities(const std::array<int, consts::abils::count> values) -> void
 {
-    for(size_t i = 0; i < values.size(); ++i) { m_abilities.at(i).second = values.at(i); }
+    for(std::size_t i = 0; i < values.size(); ++i) { m_abilities.at(i).second = values.at(i); }
 }
 
-auto Abilities::getOneAbility(const unsigned short position) const
-    -> std::pair<std::string, unsigned short>
+auto Abilities::getOneAbility(const int position) const -> std::pair<std::string, int>
 {
     return m_abilities.at(position);
 }
 
 auto Abilities::getAbilities() const
-    -> std::array<std::pair<std::string, unsigned int>, consts::abils::count>
+    -> std::array<std::pair<std::string, int>, consts::abils::count>
 {
     return m_abilities;
 }
 
 // The formula to get an Ability modifier is: (Ability - 10) / 2 rounded up.
-auto Abilities::getAbilityMod(unsigned short position) const -> short
+auto Abilities::getAbilityMod(int position) const -> int
 {
     return std::ceil((m_abilities.at(position).second - consts::abils::form10) /
                      consts::abils::form2);

@@ -8,7 +8,7 @@ class HitPoints
 public:
     /* Constructors */
     // Hit points are dealt according to class, constitution and level.
-    HitPoints(ClassEnum /*cclass*/, short /*constitution*/, unsigned int level = 1);
+    HitPoints(ClassEnum /*cclass*/, int /*constitution*/, int level = 1);
     ~HitPoints()                 = default;
     HitPoints(const HitPoints &) = default;
     auto operator=(const HitPoints &) -> HitPoints & = default;
@@ -17,8 +17,8 @@ public:
     /******************/
     /* Setters */
     // Hitpoints are treated differently if they are for the first level.
-    auto setHitPoints(ClassEnum /*cclass*/, short /*constitution*/, unsigned int /*level*/) -> void;
-    auto setHitPointsFirstLevel(ClassEnum /*cclass*/, short /*constitution*/) -> void;
+    auto setHitPoints(ClassEnum /*cclass*/, int /*constitution*/, int /*level*/) -> void;
+    auto setHitPointsFirstLevel(ClassEnum /*cclass*/, int /*constitution*/) -> void;
     /******************/
     /* Getters */
     [[nodiscard]] auto getHitPoints() const -> int;

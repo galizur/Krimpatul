@@ -7,7 +7,7 @@
 
 class Abilities
 {
-    using ArrayOfPairs = std::array<std::pair<std::string, unsigned int>, consts::abils::count>;
+    using ArrayOfPairs = std::array<std::pair<std::string, int>, consts::abils::count>;
 
 public:
     /* Constructors */
@@ -21,17 +21,16 @@ public:
     /******************/
     /* Setters */
     // Sometimes we need to change only one of the abilities.
-    auto setOneAbility(unsigned short /*position*/, unsigned short /*value*/) -> void;
+    auto setOneAbility(int /*position*/, int /*value*/) -> void;
     // Other times we need to change them all.
-    auto setAbilities(std::array<unsigned short, consts::abils::count> /*values*/) -> void;
+    auto setAbilities(std::array<int, consts::abils::count> /*values*/) -> void;
     /******************/
     /* Getters */
     // [[nodiscard]] warns the programmer if the returned object is discarded by the caller.
-    [[nodiscard]] auto getOneAbility(unsigned short /*position*/) const
-        -> std::pair<std::string, unsigned short>;
+    [[nodiscard]] auto getOneAbility(int /*position*/) const -> std::pair<std::string, int>;
     [[nodiscard]] auto getAbilities() const -> ArrayOfPairs;
     // An ability modifier is a special number in D&D.
-    [[nodiscard]] auto getAbilityMod(unsigned short /*position*/) const -> short;
+    [[nodiscard]] auto getAbilityMod(int /*position*/) const -> int;
     /********************/
     // Set abilities back to their base number (8).
     auto resetAbilities(RaceEnum /*race*/) -> void;
