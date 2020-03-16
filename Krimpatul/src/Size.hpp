@@ -6,33 +6,28 @@
 class Size
 {
 public:
-    //! Copy constructor
+    /* Deleted Constructors */
     Size(const Size &other) = delete;
-    //! Move constructor
-    Size(Size &&other) = delete;
-    //! Copy assignment operator
+    Size(Size &&other)      = delete;
     auto operator=(const Size &other) -> Size & = delete;
-    //! Move assignment operator
     auto operator=(Size &&other) -> Size & = delete;
-
-    auto setSize(SizeEnum) -> void;
-    auto setSizeMod(SizeEnum) -> void;
-
+    /************************/
+    /* Setters */
+    auto setSize(SizeEnum /*size*/) -> void;
+    auto setSizeMod(SizeEnum /*size*/) -> void;
+    /************************/
+    /* Getters */
     [[nodiscard]] auto getSize() const -> SizeEnum;
     [[nodiscard]] auto getSizeMod() const -> short;
-
-    friend auto operator<<(std::ostream &out, const Size &size) -> std::ostream &;
-
+    /************************/
 protected:
-    Size(SizeEnum size = SizeEnum::MEDIUM);
+    /* Constructors */
+    Size(RaceEnum /*race*/);
     virtual ~Size() = default;
-
+    /************************/
 private:
-    SizeEnum                        m_size;
-    short                           m_size_mod;
-    std::map<SizeEnum, std::string> enumToStringMap;
+    SizeEnum m_size;
+    short    m_size_mod;
 };
-
-auto operator<<(std::ostream &out, const Size &size) -> std::ostream &;
 
 #endif

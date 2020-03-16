@@ -8,24 +8,25 @@
 class Race : public Size
 {
 public:
-    Race(const Size &) = delete;
+    /* Deleted constructors */
+    Race(const Race &) = delete;
     auto operator=(const Race &) -> Race & = delete;
     Race(Race &&)                          = delete;
     auto operator=(Race &&) -> Race & = delete;
-
-    auto               setRace(RaceEnum /*race*/) -> void;
+    /*************************/
+    /* Setters */
+    auto setRace(RaceEnum /*race*/) -> void;
+    /*************************/
+    /* Getters */
     [[nodiscard]] auto getRace() const -> RaceEnum;
-    friend auto        operator<<(std::ostream &out, const Race &race) -> std::ostream &;
-
+    /*************************/
 protected:
-    Race(RaceEnum race = RaceEnum::HUMAN, SizeEnum size = SizeEnum::MEDIUM);
+    /* Constructors */
+    Race(RaceEnum /*race*/);
     ~Race() override = default;
-
+    /**************************/
 private:
-    RaceEnum                        m_race;
-    std::map<RaceEnum, std::string> enumToStringMap;
+    RaceEnum m_race;
 };
-
-auto operator<<(std::ostream &out, const Race &race) -> std::ostream &;
 
 #endif
