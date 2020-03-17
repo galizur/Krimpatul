@@ -1,7 +1,11 @@
 #include "krpch.hpp"
 
-auto main(int argc, char** argv) -> int
-{
+#include "Window.hpp"
 
+auto main(int argc, char **argv) -> int
+{
+    Win win;
+    win.show();
+    nana::exec();
     return 0;
 }

@@ -1,2 +1,2 @@
 #!sh
-make clean; bear make
+bear make

@@ -12,6 +12,11 @@ configurations
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["nana"] = "Krimpatul/vendor/nana/include"
+
+include "Krimpatul/vendor/nana"
+
 group "A. Project"
 project "Krimpatul"
 location "Krimpatul"
@@ -36,6 +41,20 @@ files
 includedirs
 {
    "%{prj.name}/src",
+   "%{IncludeDir.nana}",
+   "/usr/include/freetype2"
+}
+
+links
+{
+   "nana",
+   "X11",
+   "pthread",
+   "rt",
+   "Xft",
+   "png",
+   "asound",
+   "fontconfig"
 }
 
 filter "system:windows"
@@ -51,6 +70,10 @@ filter "system:linux"
 defines
 {
    "KR_PLATFORM_LINUX"
+}
+
+links
+{
 }
 
 toolset "clang"
