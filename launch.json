@@ -1,0 +1,15 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "lldb-vscode",
+			"cwd": "/home/charlie/Programming/dev/cpp/Krimpatul",
+			"request": "launch",
+			"program": "/home/charlie/Programming/dev/cpp/Krimpatul/build/src/krimpatul",
+			"name": "Krimpatul"
+		}
+	]
+}
+
+
+

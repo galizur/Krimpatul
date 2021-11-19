@@ -1,0 +1,6 @@
+[options]
+backend = ninja
+
+[properties]
+native_file = ['native.ini']
+
